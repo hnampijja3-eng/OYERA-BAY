@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oyera Service Bay Management</title>
+    <!-- Boxicons for clean, modern icons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class='bx bx-wrench'></i>
+            <span class="logo_name">Oyera Bay</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="#" class="active" onclick="switchTab('dashboard')">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="switchTab('cust-reg')">
+                    <i class='bx bx-user-plus'></i>
+                    <span class="links_name">Customer Reg</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="switchTab('tech-reg')">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">Technician Reg</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="switchTab('cust-view')">
+                    <i class='bx bx-list-ul'></i>
+                    <span class="links_name">View Customers</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="switchTab('bay-rates')">
+                    <i class='bx bx-calculator'></i>
+                    <span class="links_name">Rates & Calculator</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="switchTab('settings')">
+                    <i class='bx bx-slider-alt'></i>
+                    <span class="links_name">Settings</span>
+                </a>
+            </li>
+
+            <li class="log_out">
+                <a href="#" onclick="handleLogout()">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Log out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <section class="main-section">
+        <!-- TOP NAVBAR / LOGIN BAR -->
+        <nav>
+            <div class="sidebar-button">
+                <span class="dashboard-title" id="page-title">Dashboard</span>
+            </div>
+            <div class="profile-details" id="login-bar">
+                <i class='bx bx-user-circle'></i>
+                <span class="admin_name">Active Session: Tech Admin</span>
+            </div>
+        </nav>
+
+        <div class="content-body">
+
+            <!-- 1. DASHBOARD PAGE -->
+            <div id="dashboard" class="tab-content active-tab">
+                <div class="overview-boxes">
+                    <div class="box">
+                        <div class="right-side">
+                            <div class="box-topic">Total Bookings</div>
+                            <div class="number">42</div>
+                        </div>
+                        <i class='bx bx-calendar-check cart'></i>
+                    </div>
+                    <div class="box">
+                        <div class="right-side">
+                            <div class="box-topic">In Service Bay</div>
+                            <div class="number">8</div>
+                        </div>
+                        <i class='bx bx-car cart-two'></i>
+                    </div>
+                    <div class="box">
+                        <div class="right-side">
+                            <div class="box-topic">Active Technicians</div>
+                            <div class="number">12</div>
+                        </div>
+                        <i class='bx bx-wrench cart-three'></i>
+                    </div>
+                </div>
+
+                <div class="card-box">
+                    <h3>Bay Status Overview</h3>
+                    <p>Welcome to the Oyera Service Bay Control Center. Use the sidebar to register new clients, track
+                        mechanics, or adjust system preferences.</p>
+                </div>
+            </div>
+
+            <!-- 2. CUSTOMER REGISTRATION PAGE -->
+            <div id="cust-reg" class="tab-content">
+                <div class="card-box form-container">
+                    <h2>Customer Registration</h2>
+                    <form onsubmit="event.preventDefault(); alert('Customer Registered Successfully!');">
+                        <div class="input-group">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="e.g. John Doe" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Phone Number</label>
+                            <input type="tel" placeholder="e.g. +256..." required>
+                        </div>
+                        <div class="input-group">
+                            <label>Car Model & License Plate</label>
+                            <input type="text" placeholder="e.g. Toyota Vanguard - UBL 123X" required>
+                        </div>
+                        <button type="submit" class="btn">Register Customer</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 3. TECHNICIAN REGISTRATION PAGE -->
+            <div id="tech-reg" class="tab-content">
+                <div class="card-box form-container">
+                    <h2>Technician Registration</h2>
+                    <form onsubmit="event.preventDefault(); alert('Technician Profile Created!');">
+                        <div class="input-group">
+                            <label>Technician Name</label>
+                            <input type="text" placeholder="Full Name" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Specialty</label>
+                            <select required>
+                                <option value="">Select Specialty</option>
+                                <option value="engine">Engine Diagnostics</option>
+                                <option value="electrical">Auto Electrics</option>
+                                <option value="suspension">Wheel Alignment & Suspension</option>
+                                <option value="body">Bodywork & Paint</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Shift Timing</label>
+                            <input type="text" placeholder="e.g. Morning (8 AM - 2 PM)" required>
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Assign Technician</button>
+                    </form>
+                </div>
+            </div>
+            <!-- 4. CUSTOMER DISPLAY / VIEW PAGE (ENHANCED) -->
+            <div id="cust-view" class="tab-content">
+                <div class="card-box display-container">
+                    <div class="display-header">
+                        <h2>Active Service Bay Queue</h2>
+                        <!-- Search & Filter Bar Add-on -->
+                        <div class="table-controls">
+                            <input type="text" id="tableSearch" placeholder="Search customer or plate..."
+                                onkeyup="filterQueueTable()">
+                            <select id="statusFilter" onchange="filterQueueTable()">
+                                <option value="all">All Statuses</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <table class="data-table" id="queueTable">
+                        <thead>
+                            <tr>
+                                <th>Queue ID</th>
+                                <th>Customer Name</th>
+                                <th>Vehicle Info</th>
+                                <th>Assigned Tech</th>
+                                <th>Est. Wait Time</th>
+                                <th>Total Cost</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        </tbody>
+                        <tr>
+                            <td>#OY-1092</td>
+                            <td class="cust-name">Harriet Nampijja</td>
+                            <td>Subaru Forester (UAY 555Y)</td>
+                            <td>Alex M.</td>
+                            <td>45 mins</td>
+                            <td><strong>180,000 UGX</strong></td>
+                            <td><span class="status status-progress">In Progress</span></td>
+                        </tr>
+                        <tr>
+                            <td>#OY-1093</td>
+                            <td class="cust-name">Michael Mukasa</td>
+                            <td>Toyota Prado (UBM 888Z)</td>
+                            <td>Sarah K.</td>
+                            <td>1 hr 20 mins</td>
+                            <td><strong>350,000 UGX</strong></td>
+                            <td><span class="status status-pending">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>#OY-1091</td>
+                            <td class="cust-name">Ivan Opio</td>
+                            <td>Mercedes C200 (UBF 432A)</td>
+                            <td>David O.</td>
+                            <td>--</td>
+                            <td><strong>90,000 UGX</strong></td>
+                            <td><span class="status status-completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>#OY-1092</td>
+                            <td>Harriet Nampijja</td>
+                            <td>Subaru Forester (UAY 555Y)</td>
+                            <td>Alex M.</td>
+                            <td>--</td>
+                            <td><strong>560,000 UGX</strong></td>
+                            <td><span class="status status-completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>#OY-1093</td>
+                            <td>Michael Mukasa</td>
+                            <td>Toyota Prado (UBM 888Z)</td>
+                            <td>Sarah K.</td>
+                            <td>2:30mins</td>
+                            <td><strong>400,000 UGX</strong></td>
+                            <td><span class="status status-pending">pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>#OY-1091</td>
+                            <td>Ivan Opio</td>
+                            <td>Mercedes C200 (UBF 432A)</td>
+                            <td>David O.</td>
+                            <td>2hrs</td>
+                            <td><strong>150,000 UGX</strong></td>
+                            <td><span class="status status-pending">pending</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 5. SETTINGS PAGE -->
+            <div id="settings" class="tab-content">
+                <div class="card-box form-container">
+                    <h2>Bay Configuration & Settings</h2>
+                    <div class="input-group checkbox-group">
+                        <label><input type="checkbox" checked> Enable SMS Alerts for Customers when car is ready</label>
+                    </div>
+                    <div class="input-group checkbox-group">
+                        <label><input type="checkbox" checked> Auto-assign available technicians</label>
+                    </div>
+                    <div class="input-group">
+                        <label>Bay Capacity Limit</label>
+                        <input type="number" value="10">
+                    </div>
+                    <button class="btn" onclick="alert('Settings Saved Successfully!')">Save Preferences</button>
+                </div>
+            </div>
+
+            <!-- 6. RATES & CALCULATOR PAGE (ADD-ON) -->
+            <div id="bay-rates" class="tab-content">
+                <div class="overview-boxes">
+                    <div class="box">
+                        <div class="right-side">
+                            <div class="box-topic">Base Labour Fee</div>
+                            <div class="number">20,000 UGX</div>
+                        </div>
+                        <i class='bx bx-wrench'></i>
+                    </div>
+                    <div class="box">
+                        <div class="right-side">
+                            <div class="box-topic">Wheel Alignment</div>
+                            <div class="number">30,000 UGX</div>
+                        </div>
+                        <i class='bx bx-compass'></i>
+                    </div>
+                    <div class="box">
+                        <div class="right-side">
+                            <div class="box-topic">Wheel Balancing</div>
+                            <div class="number">20,000 UGX</div>
+                        </div>
+                        <i class='bx bx-disc'></i>
+                    </div>
+                </div>
+
+                <div class="calculator-grid" style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <!-- Left Side: Interactive Cost Estimator -->
+                    <div class="card-box" style="flex: 1; min-width: 350px;">
+                        <h2>Senior Tech Estimator</h2>
+                        <p style="margin-bottom: 15px; font-size: 13px; color: #cbd5e1;">Select the items determined by
+                            the senior technician to calculate total job costs.</p>
+
+                        <form id="calcForm" onchange="calculateJobTotal()">
+                            <div class="input-group checkbox-group">
+                                <label><input type="checkbox" id="baseLabour" checked disabled> Base Bay Labour Fee
+                                    (Fixed) — 20,000 UGX</label>
+                            </div>
+                            <div class="input-group checkbox-group">
+                                <label><input type="checkbox" id="alignmentOpt"> Add Wheel Alignment — 30,000
+                                    UGX</label>
+                            </div>
+                            <div class="input-group checkbox-group">
+                                <label><input type="checkbox" id="balanceOpt"> Add Wheel Balancing — 20,000 UGX</label>
+                            </div>
+
+                            <div class="input-group">
+                                <label>Engine Oil Selected</label>
+                                <select id="oilSelect">
+                                    <option value="0">None</option>
+                                    <option value="79000">Standard Engine Oil — 79,000 UGX</option>
+                                    <option value="140000">Premium Engine Oil — 140,000 UGX</option>
+                                    <option value="200000">Synthetic Engine Oil — 200,000 UGX</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <label>Oil Filter Selected</label>
+                                <select id="filterSelect">
+                                    <option value="0">None</option>
+                                    <option value="15000">Standard Filter — 15,000 UGX</option>
+                                    <option value="20000">Heavy Duty Filter — 20,000 UGX</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                <label>Brake Fluid Selected</label>
+                                <select id="fluidSelect">
+                                    <option value="0">None</option>
+                                    <option value="13000">Brake Fluid Bottle — 13,000 UGX</option>
+                                </select>
+                            </div>
+
+                            <div
+                                style="margin-top: 25px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px; border-left: 4px solid #f39c12;">
+                                <span style="font-size: 14px; color: #cbd5e1; display: block;">Total Invoice
+                                    Amount:</span>
+                                <span id="invoiceTotal"
+                                    style="font-size: 24px; font-weight: 700; color: #2ecc71;">20,000 UGX</span>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Right Side: Official Price Guide Reference Card -->
+                    <div class="card-box" style="flex: 1; min-width: 350px;">
+                        <h2>OAS Bay Inventory & Rates</h2>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Service / Repair Item</th>
+                                    <th>Official Rate (UGX)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Base Service Bay Labour</td>
+                                    <td>20,000 UGX</td>
+                                </tr>
+                                <tr>
+                                    <td>Wheel Alignment Charge</td>
+                                    <td>30,000 UGX</td>
+                                </tr>
+                                <tr>
+                                    <td>Wheel Balancing Charge</td>
+                                    <td>20,000 UGX</td>
+                                </tr>
+                                <tr>
+                                    <td>Engine Oils Range</td>
+                                    <td>79,000 - 200,000 UGX</td>
+                                </tr>
+                                <tr>
+                                    <td>Oil Filters Range</td>
+                                    <td>15,000 - 20,000 UGX</td>
+                                </tr>
+                                <tr>
+                                    <td>Brake Fluids</td>
+                                    <td>13,000 UGX</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="margin-top: 15px; font-size: 12px; color: #cbd5e1; font-style: italic;">* Note: A car
+                            can come in for one or more services a day. Multiple technicians can be assigned to a single
+                            vehicle session.</p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- SIMPLE JAVASCRIPT FOR ROUTING & LOGOUT -->
+    <script>
+        function switchTab(tabId) {
+            // Hide all sections
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active-tab');
+            });
+            // Show selected section
+            document.getElementById(tabId).classList.add('active-tab');
+
+            // Update title text in Navbar
+            const titleMap = {
+                'dashboard': 'Dashboard',
+                'cust-reg': 'Customer Registration',
+                'tech-reg': 'Technician Registration',
+                'cust-view': 'Customer Directory',
+                'settings': 'System Settings'
+            };
+            document.getElementById('page-title').innerText = titleMap[tabId];
+
+            // Update active state in sidebar menu
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+        }
+
+        function handleLogout() {
+            if (confirm("Are you sure you want to log out from Oyera Service Bay?")) {
+                alert("Logged out! Redirecting to simulation entry...");
+                window.location.reload();
+            }
+        }
+        function filterQueueTable() {
+            let searchInput = document.getElementById('tableSearch').value.toLowerCase();
+            let filterInput = document.getElementById('statusFilter').value;
+            let table = document.getElementById('queueTable');
+            let tr = table.getElementsByTagName('tr');
+
+            // Loop through all table rows (skipping the header)
+            for (let i = 1; i < tr.length; i++) {
+                let row = tr[i];
+                let textContent = row.textContent.toLowerCase();
+                let statusSpan = row.querySelector('.status');
+                let statusText = statusSpan ? statusSpan.innerText : '';
+
+                let matchesSearch = textContent.includes(searchInput);
+                let matchesStatus = (filterInput === 'all') || (statusText === filterInput);
+
+                if (matchesSearch && matchesStatus) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        }
+        // 1. Update your existing switchTab title mapping to recognize the new page
+        const titleMap = {
+            'dashboard': 'Dashboard',
+            'cust-reg': 'Customer Registration',
+            'tech-reg': 'Technician Registration',
+            'cust-view': 'Customer Directory',
+            'settings': 'System Settings',
+            'bay-rates': 'OAS Rates & Job Estimator' // Added row
+        };
+
+        // 2. Add this calculation logic function anywhere inside your script tags
+        function calculateJobTotal() {
+            let total = 20000; // Fixed Base Labour Charge
+
+            // Check optional service additions
+            if (document.getElementById('alignmentOpt').checked) total += 30000;
+            if (document.getElementById('balanceOpt').checked) total += 20000;
+
+            // Add selected fluids and parts prices
+            total += parseInt(document.getElementById('oilSelect').value);
+            total += parseInt(document.getElementById('filterSelect').value);
+            total += parseInt(document.getElementById('fluidSelect').value);
+
+            // Format output cleanly back into the invoice box
+            document.getElementById('invoiceTotal').innerText = total.toLocaleString() + " UGX";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+    "name": "oyera-service-bay",
+    "version": "1.0.0",
+    "description": "Oyera Auto Service Bay Management System",
+    "main": "server.js",
+    "type": "commonjs",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "express": "^4.19.2",
+        "pg": "^8.11.5"
+    }
+}
